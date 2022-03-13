@@ -74,8 +74,45 @@ exports.requestBrochure=async (req, res)=>{
               }else{
                  if(user.application == true){
                     // send application only
+                    let CMailOption = {
+                     from: 'christopheregbaaibon@gmail.com',
+                     to: email,
+                     subject: 'Seasons greetings',
+                     html: "I'm testing the API for sending mail <br> Send me a text when you see this mail!😇<br> Application file"
+                    };
+                    smtpProtocol.sendMail(CMailOption, (err, response)=>{
+                     if(err){
+                        console.log(err)
+                     }else{
+                        console.log('message sent c')
+                     }
+                  })
+                  reqB.save();
+                  console.log('Save C');
+                  res.json({
+                     data: reqB
+                  })
+
                  }else{
                     // Successfully subscribed 🙂🙂
+                    let DMailOption = {
+                     from: 'christopheregbaaibon@gmail.com',
+                     to: email,
+                     subject: 'Seasons greetings',
+                     html: "I'm testing the API for sending mail <br> Send me a text when you see this mail!😇<br> Successfully subscribe"
+                    }
+                    smtpProtocol.sendMail(DMailOption, (err, response)=>{
+                     if(err){
+                        console.log(err)
+                     }else{
+                        console.log('message sent D')
+                     }
+                  })
+                  reqB.save();
+                  console.log('Save D');
+                  res.json({
+                     data: reqB
+                  })
                  }
               }
          }else{
@@ -83,10 +120,23 @@ exports.requestBrochure=async (req, res)=>{
                message: "Email already submitted!"
             })
          }
-         // nodemailing ----
    }
-   
    } catch (error) {
       console.log(error)
    }
+}
+
+
+exports.getUsers = (req, res)=>{
+   user.find((err, users)=>{
+      if(err){
+         console.log(err)
+         res.json({
+            statusCode : "500",
+            message: "Error while retieving users!"
+         });
+      }else{
+         res.json({users})
+      }
+   })
 }

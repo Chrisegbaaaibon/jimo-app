@@ -1,6 +1,8 @@
 const routes = require('express').Router();
-const { requestBrochure } = require('../controller.js/handler')
+const { requestBrochure, getUsers } = require('../controller.js/handler')
 
-routes.post('/req', requestBrochure)
+routes.post('/req', requestBrochure);
 
-module.exports = routes
+routes.get('/users', getUsers)
+
+module.exports = routes;
