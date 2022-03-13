@@ -1,8 +1,5 @@
 const  user = require('../database/schema');
-require('dotenv').config;
 const mailer = require('nodemailer');
-const Verifier = require('email-verifier');
-const { response } = require('express');
 
 exports.requestBrochure=async (req, res)=>{
    // processes start here ---
@@ -12,7 +9,7 @@ exports.requestBrochure=async (req, res)=>{
          service: "Gmail",
            auth: {
               user: "christopheregbaaibon@gmail.com",
-              pass: "sjeqcexqxzgjzwxz"
+              pass: process.env.PASS
            }
         });
      
